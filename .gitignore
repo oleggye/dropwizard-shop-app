@@ -1,0 +1,5 @@
+/dependency-reduced-pom.xml
+/.idea/
+/target/
+/dropwizard-app.iml
+/shop_model.mwb
