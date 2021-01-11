@@ -1,7 +1,7 @@
 package by.minsk.resource;
 
-import by.minsk.model.Brand;
-import by.minsk.service.BrandService;
+import by.minsk.model.Product;
+import by.minsk.service.ProductService;
 import io.dropwizard.logback.shaded.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.inject.Inject;
@@ -19,36 +19,36 @@ import javax.ws.rs.core.UriBuilder;
 import java.util.List;
 import java.util.Optional;
 
-@Path("brands")
+@Path("products")
 @Produces(MediaType.APPLICATION_JSON)
-public class BrandResource {
-    private final BrandService brandService;
+public class ProductResource {
+    private final ProductService productService;
     private final Integer defaultSize;
 
     @Inject
-    public BrandResource(BrandService brandService, @Named("defaultSize") Integer defaultSize) {
-        this.brandService = brandService;
+    public ProductResource(ProductService productService, @Named("defaultSize") Integer defaultSize) {
+        this.productService = productService;
         this.defaultSize = defaultSize;
     }
 
     @GET
-    public List<Brand> getBrands(@QueryParam("size") Optional<Integer> size) {
-        return brandService.getBrands(size.orElse(defaultSize));
+    public List<Product> getAllProducts(@QueryParam("size") Optional<Integer> size) {
+        return productService.getProducts(size.orElse(defaultSize));
     }
 
     @GET
     @Path("/{id}")
-    public Brand getBrandById(@PathParam("id") Long id) {
-        return brandService.getBrandById(id);
+    public Product getProductById(@PathParam("id") Long id) {
+        return productService.getProductById(id);
     }
 
     @POST
-    public Response addBrand(@NonNull @Valid Brand brand) {
-        Brand savedBrand = brandService.saveBrand(brand);
+    public Response addProduct(@NonNull @Valid Product product) {
+        Product savedProduct = productService.saveProduct(product);
 
         return Response.created(UriBuilder.fromResource(BrandResource.class)
-                .build(brand))
-                .entity(savedBrand)
+                .build(product))
+                .entity(savedProduct)
                 .build();
     }
 }

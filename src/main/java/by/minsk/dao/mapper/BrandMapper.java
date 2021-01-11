@@ -1,4 +1,4 @@
-package by.minsk.repository.mapper;
+package by.minsk.dao.mapper;
 
 import by.minsk.model.Brand;
 import org.jdbi.v3.core.mapper.ColumnMapper;
@@ -14,9 +14,9 @@ public class BrandMapper implements RowMapper<Brand>, ColumnMapper<Brand> {
     @Override
     public Brand map(ResultSet rs, StatementContext ctx) throws SQLException {
 
-        long id = rs.getLong("id");
-        String name = rs.getString("name");
-        Date year = rs.getDate("year");
+        long id = rs.getLong("br.id");
+        String name = rs.getString("br.name");
+        Date year = rs.getDate("br.year");
 
         return Brand.builder()
                 .id(id)
