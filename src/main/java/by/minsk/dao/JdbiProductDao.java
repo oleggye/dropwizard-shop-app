@@ -19,8 +19,8 @@ import java.util.Optional;
 @RegisterRowMapper(BrandMapper.class)
 public interface JdbiProductDao extends ProductDao {
 
-    String SELECT_ALL_PRODUCTS = "select pr.id, pr.title, pr.productType, pr.brand_id, pr.price, br.id, br.name," +
-            " br.year from product as pr join brand as br on pr.brand_id = br.id";
+    String SELECT_ALL_PRODUCTS = "select pr.id, pr.title, pr.productType, pr.brand_id, pr.price, br.id, br.name,"
+            + " br.year from product as pr join brand as br on pr.brand_id = br.id";
     String SELECT_PRODUCT_BY_ID = SELECT_ALL_PRODUCTS + " where pr.id = :productId";
 
     @Override
@@ -34,8 +34,8 @@ public interface JdbiProductDao extends ProductDao {
     Optional<Product> findById(@Bind("productId") Long productId);
 
     @Override
-    @SqlUpdate("insert into product (title, productType, brand_id, price) " +
-            "values (:product.title, :product.productType, :product.brand_id, :product.price)")
+    @SqlUpdate("insert into product (title, productType, brand_id, price) "
+            + "values (:product.title, :product.productType, :product.brand_id, :product.price)")
     @GetGeneratedKeys
     long save(@BindBean("product") Product product);
 }

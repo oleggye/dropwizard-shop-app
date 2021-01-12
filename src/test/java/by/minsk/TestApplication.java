@@ -1,13 +1,11 @@
 package by.minsk;
 
-import by.minsk.config.BasicConfiguration;
 import by.minsk.config.factory.BrandDaoFactory;
 import by.minsk.config.factory.MysqlJdbiFactory;
 import by.minsk.config.factory.ProductDaoFactory;
 import by.minsk.dao.BrandDao;
 import by.minsk.dao.ProductDao;
 import by.minsk.exception.mapper.NotFoundExceptionMapper;
-import by.minsk.health.ApplicationHealthCheck;
 import by.minsk.resource.BrandResource;
 import by.minsk.resource.ProductResource;
 import by.minsk.service.BrandService;
@@ -23,13 +21,9 @@ import org.jdbi.v3.core.Jdbi;
 
 import javax.inject.Singleton;
 
-public class IntroductionApplication extends Application<BasicConfiguration> {
-    public static void main(String[] args) throws Exception {
-        new IntroductionApplication().run("server", "config.yml");
-    }
-
+public class TestApplication extends Application<TestConfiguration> {
     @Override
-    public void run(BasicConfiguration configuration, Environment environment) {
+    public void run(TestConfiguration configuration, Environment environment) {
         environment.jersey().register(BrandResource.class);
         environment.jersey().register(ProductResource.class);
         environment.jersey().register(new NotFoundExceptionMapper());
@@ -69,12 +63,10 @@ public class IntroductionApplication extends Application<BasicConfiguration> {
                 bind(environment);
             }
         });
-
-        environment.healthChecks().register("application", new ApplicationHealthCheck());
     }
 
     @Override
-    public void initialize(Bootstrap<BasicConfiguration> bootstrap) {
+    public void initialize(Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.setConfigurationSourceProvider(new ResourceConfigurationSourceProvider());
         super.initialize(bootstrap);
     }

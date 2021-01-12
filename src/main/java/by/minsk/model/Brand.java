@@ -48,6 +48,7 @@ public class Brand {
             return brand;
         }
 
+        @Override
         public String toString() {
             return "Brand.BrandBuilder(id=" + this.id + ", name=" + this.name + ", year=" + this.year + ")";
         }
